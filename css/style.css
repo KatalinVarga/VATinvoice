@@ -1,0 +1,229 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#formContainer{
+    background-color: white;
+    height: 100%;
+    width: 40vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+  /* // the calendar date & the submit button do not require a long field nor the VAT rate selector */
+  #date, #date2, #VATRate, #submit {
+    width: 10vw;
+  }
+  
+input, textarea {
+  background-color: rgb(233, 233, 245);
+}
+
+.instruction{
+  padding: 5px;
+}
+
+#invoiceForm{
+    display: flex;
+    flex-direction: column;
+    padding: 100px;
+    width: 100%;
+}
+
+#invoiceForm > input{
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+#invoiceContainer{
+    padding: 50px;
+    margin-left: 2.5%;
+    margin-right: 3.5%;
+}
+
+#invoiceHeader{
+  text-align: left;
+  padding-left: 1%;
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+}
+
+table {
+    width:100%;
+    border: 3px solid white;
+    border-collapse: collapse;
+    text-align: left;
+  }
+
+  th {
+    background-color: white;
+    color: black;
+    padding:10px;  
+    font-size: 18px;
+    height: 40px;
+    width: 25%;
+  }
+
+  td {
+    background-color:white;
+    font-size: 14px;
+    padding:15px;  
+    width:25%;
+  }
+
+  #VAT{
+    padding: 10px;
+  }
+
+  #submit {
+    margin-top:20px;
+    padding-top:10px;
+  }
+
+#VATAmount, #VATFieldText, #VATRateDisplay, .VATFieldText{
+  border-bottom: double;
+  background-color: rgb(233, 233, 245);
+}
+
+#invNumber, #invNumberFieldDisplay {
+  padding-bottom:50px;
+}
+
+
+#print{
+  margin-top: 5%;
+  padding-top:10px;
+}
+
+.grey {
+  background-color:  rgb(233, 233, 245);
+}
+ 
+/* // styling for printing the invoice-only section - reference:https://stackoverflow.com/questions/468881/print-div-id-printarea-div-only/7532581#7532581 */
+#printable { display: none; }
+    @media print
+    {
+        #non-printable { display: none; }
+        #invoiceContainer { display: block; }
+        #invoiceContainer{
+          left:0px;
+          top:0px;
+          margin:0px}
+          body {
+          margin: 5px;
+          }
+
+/* //avoiding to print second blank page, reference: https://stackoverflow.com/questions/7846346/how-to-avoid-extra-blank-page-at-end-while-printing */
+          html, body {
+            height: 99%;    
+        }
+      }
+
+
+ /* responsive screens */
+    /* for smaller screen sizes, the invoice image will appear on a new subpage and the form is styled differently*/
+    @media only screen and (max-width: 1200px) {
+        .container {
+          justify-content: left;
+          padding-left: 10%;
+        }
+
+        #print{
+          margin-left:10px;
+        }
+
+        #invoiceContainer{
+          display: none;
+        }
+
+        #formContainer{
+          width: 80vw;
+        }
+
+       #invoiceForm{
+         padding: 0px;
+        }
+        
+        #date,#date2, #VATRate, #submit  {
+          width: 20vw;
+        } 
+      }
+
+    @media only screen and (max-width: 1200px) and (min-width: 850px) { 
+       #date,#date2, #VATRate, #submit  {
+         width: 20vw;
+           } 
+        .table{
+          width:50vw;
+        }
+      }
+
+    @media only screen and (max-width: 650px) and (min-width: 400px) { 
+          #invoiceForm > input{
+          margin-bottom: 5px;
+          padding: 0px;
+          }
+        #date,#date2, #VATRate,#submit  {
+          width: 30vw;
+            } 
+      } 
+
+    @media only screen and (max-width: 400px) { 
+      #invoiceForm > input{
+        margin-bottom: 5px;
+        padding: 0px;
+        }
+       #date,#date2, #VATRate, #submit {
+         width: 40vw;
+           } 
+      } 
+
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

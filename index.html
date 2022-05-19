@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container" >
+        <!-- the form is not for print hence it is non-printable -->
+        <div id="non-printable">
+                 <div id="formContainer">
+                    <form id="invoiceForm">
+                        <!-- input fields are set to mandatory as these are VAT invoice requirements             
+                       ( information from https://www.gov.uk/vat-record-keeping/vat-invoices), character lenght is limited due to practical reasons-->
+
+                        <label  for="calendar" class="instruction" >Please select the invoice date:</label>
+                        <input type="date" name="date" id="date" placeholder="dd-mm-yyyy" value=""min="1997-01-01" max="2030-12-31" required>
+                        <label  for="calendar" class="instruction">Please select the supply date:</label>
+                        <input type="date" name="date2" id="date2" required>
+                        <label  for="name" class="instruction">Please enter the following:</label>
+                        <input type="text" name="companyName" id="companyName" placeholder="Your company's name" maxlength = "50" required >
+                        <input type="text" name="companyAddress" id="companyAddress" placeholder="Your company's address" maxlength = "150" required >
+                        <!--  VAT reg.number (VRN) is 9 characters long in the UK (https://sumup.co.uk/invoices/dictionary/vat-number/) -->
+                        <input type="text" name="VATReg" id="VATReg" placeholder="Your VAT number" minlength= 11 maxlength="11" required>
+                        <!-- phone numbers can be written down differently (e.g.:0044-7484-318263/ +447484318263,07484318263/01752787922 and the vendor might want to display multiple numbers so I did not want to limit the character numbers too much) -->
+                        <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone number" maxlength = "80"required>
+                        <input type="text" name="customerName" id="customerName" placeholder="Customer's name" maxlength = "50" required>
+                        <input type="text" name="customerAddress" id="customerAddress" placeholder="Customer's address" maxlength = "150" required>
+                        <input type="text" name="invoiceNumber" id="invoiceNumber" placeholder="Invoice number" maxlength = "30" required>
+                        <input type="text" name="description" id="description" placeholder="Description of goods/services" maxlength = "80" required>
+                        <input type="number" name="unitPrice" id="unitPrice" step=0.01 placeholder="Unit price" maxlength = "15" required>
+                        <input type="number" name="discount" id="discount" step=0.01 placeholder="Discount rate" maxlength = "4" required>
+                        <input type="number" name="quantity" id="quantity" step=0.01 placeholder="Quantity" maxlength = "15" required>
+                        <!-- the vendor might want to indicate the unit of measurement, eg. box/ piece/kg,etc. -->
+                        <input type="text" name="unit" id="unit" placeholder="Unit" maxlength = "15" required>
+                        <label for="VATRate" class="instruction">VAT rate:</label>
+                        <select id="VATRate" name="VATRate">
+                        <option value="(exempt)">VAT exempt</option>
+                        <option value="(zero rated)">0%</option>
+                        <option value="(5%)">5%</option>
+                        <option value="(20%)">20%</option>
+                        </select>
+                        <input type="submit"   id="submit" value="Fill in" >
+                    </form>
+                    <div>
+                        <button id="print"  onClick="window.print()">
+                        Print invoice
+                        </button>
+                    </div>
+                 </div>
+        </div>
+            <!-- actual invoice image appears here but it is only visible on bigger screens (for smaller screens, the print preview shows the image) -->
+                 <div id="invoiceContainer"  >
+                     <div>
+                        <h1 id="invoiceHeader">VAT Invoice</h1>
+                     </div>
+                    <table >
+                        <tr>
+                        <th>Vendor's name:</th>
+                        <td id="vendorName"></td>
+                        <th >Customer's name:</th>
+                        <td id="customersName"></td>
+                        </tr>
+                        <tr>
+                            <td>Address:</td>
+                            <td id="vendorAddress"></td>
+                            <td >Address:</td>
+                            <td id="customersAddress"></td>
+                        </tr>
+                        <tr>
+                            <td >VAT registration number:</td>
+                            <td id="VATRegNo"></td>
+                        </tr>
+                            <tr>
+                                <td>Phone number:</td>
+                                <td id="phone"></td>
+                            </tr>
+                            <tr>
+                                <td>Invoice date:</td>
+                                <td id="invoiceDate"></td>
+                                <td>Supply date:</td>
+                                <td id="supplyDate"></td>
+                            </tr>
+                            <tr>
+                                <td id="invNumberFieldDisplay">Invoice number:</td>
+                                <td id="invNumber"></td>
+                            </tr>
+                
+                            <tr >
+                                <td class="grey">ITEM DESCRIPTION</td>
+                                <td class="grey">QUANTITY</td>
+                                <td class="grey">UNIT</td>
+                                <td class="grey">PRICE</td>
+                                <td class="grey">DISCOUNT RATE</td>
+                                <td class="grey">SUBTOTAL</td>
+                            </tr>
+                            <tr >
+                                <td id="item" class="grey"></td>
+                                <td id="qty" class="grey"></td>
+                                <td id="unitOfMeasurement"class="grey"></td>
+                                <td id="price"class="grey"></td>
+                                <td id="discountRate"class="grey"></td>
+                                <td id="net"class="grey"></td>
+                            </tr>
+                            <tr >
+                                <td class="VATFieldText" ></td>
+                                <td class="VATFieldText" ></td>
+                                <td class="VATFieldText" ></td>
+                                <td class="VATFieldText" >VAT:</td>
+                                <td id="VATRateDisplay"class="grey"></td>
+                                <td id="VATAmount" class="grey"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <th>Total amount:</th>
+                                <td></td>
+                                <th id="totalAmount"></th>
+                            </tr>
+                    </table>
+                </div>
+    </div>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+        <script src="js/firebase.js"></script>
+        <script src="js/script.js"></script>
+</body>
+</html>
